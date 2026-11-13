@@ -1,0 +1,59 @@
+# =============================================================================
+# _quarto.yml — プロジェクト設定ファイル
+#
+# Quarto はこのファイルを見てサイトをビルドします。個々の .qmd に書いた設定より
+# 優先順位が低く、「サイト共通の既定値」を置く場所です。
+# ページ固有の設定は、その .qmd の冒頭（YAML フロントマター）に書きます。
+#
+# ビルド:    quarto render   → docs/ に出力
+# プレビュー: quarto preview  → ブラウザで自動リロード
+# =============================================================================
+
+project:
+  type: website
+  output-dir: docs     # レンダリング結果の出力先（公開は quarto publish が行う）
+
+# 計算結果のキャッシュ設定。R チャンクを使っていないので実質的に無関係だが、
+# 将来チャンクを追加したときの既定として auto にしておく。
+execute:
+  freeze: auto
+
+lang: ja
+
+website:
+  # index.qmd の pagetitle と同じ文字列にしておくこと。
+  # 食い違うと Quarto がタブのタイトルに「ページ名 – サイト名」と
+  # 連結してしまい、名前が重複して表示される。
+  title: "竹田 恒 | TAKEDA Hisashi"
+  site-url: https://tkdhss111.github.io
+  repo-url: https://github.com/tkdhss111/tkdhss111.github.io
+
+  # ブラウザのタブに出るアイコン。Quarto が <link rel="icon"> を生成し、
+  # 画像を出力ディレクトリへコピーする。
+  #
+  # 【このテンプレートを使う人へ】
+  # 下の画像は作成者の家紋です。自分の画像に差し替えるか、
+  # この行を削除してください（ファビコンは無くても構いません）。
+  favicon: fig/tkd_crest_sakura.png
+
+  # 各ページに「ソースを見る」リンクを出す。
+  # このサイトの .qmd 自体を R 授業の教材として読ませるための設定。
+  repo-actions: [source]
+
+  # 1ページ構成なので、サイドバー・ページ送り・検索はいずれも不要。
+  # website プロジェクトのまま公開パイプラインだけを使う。
+  page-navigation: false
+
+  page-footer:
+    center: "&copy; 2026 竹田 恒"
+
+format:
+  html:
+    theme:
+      light: cosmo                    # Bootswatch のテーマ名
+      dark: [cosmo, theme-dark.scss]  # cosmo を土台に自作 scss を重ねる
+    css: styles.css
+    mainfont: "Klee One"
+    toc: false          # 1ページなので目次は置かない
+    code-copy: true
+    include-in-header: _includes/header.html
